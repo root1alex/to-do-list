@@ -56,7 +56,6 @@ class NewVisitorTest(LiveServerTestCase):
         # There is still a text box inviting her to add another item. She
         # enters "Use peacock feathers to make a fly" (Edith is very
         # methodical)
-        self.fail('Finish the test!')
 
         # The page updates again, and now shows both items on her list
 
@@ -78,8 +77,8 @@ class NewVisitorTest(LiveServerTestCase):
         # Francis visits the home page. There is no sign of Edith's list
         self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertionNotIn('Buy peacock feathers', page_text)
-        self.assertionNotIn('make a fly', page_text)
+        self.assertNotIn('Buy peacock feathers', page_text)
+        self.assertNotIn('make a fly', page_text)
 
         # Francis starts a new list by entrering a new item. he
         # is liess interesting than Edith...
@@ -99,3 +98,5 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
         # Satisfied, they both go back to sleep
+
+        self.fail('Finish the test!')
