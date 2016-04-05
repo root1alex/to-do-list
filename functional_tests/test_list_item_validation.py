@@ -60,5 +60,12 @@ class ItemValidationTest(FunctionalTest):
         error = self.get_error_element()
         self.assertFalse(error.is_displayed())
 
+        # Edith checks click() event
+        self.browser.get(self.server_url)
+        self.get_item_input_box().send_keys('\n')
+        self.get_item_input_box().click()
+        error = self.get_error_element()
+        self.assertFalse(error.is_displayed())
+
     def get_error_element(self):
         return self.browser.find_element_by_css_selector('.has-error')
