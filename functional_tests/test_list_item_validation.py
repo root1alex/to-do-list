@@ -1,5 +1,5 @@
-from unittest import skip
 from .base import FunctionalTest
+import time
 
 
 class ItemValidationTest(FunctionalTest):
@@ -63,6 +63,7 @@ class ItemValidationTest(FunctionalTest):
         # Edith checks click() event
         self.browser.get(self.server_url)
         self.get_item_input_box().send_keys('\n')
+        time.sleep(1)
         self.get_item_input_box().click()
         error = self.get_error_element()
         self.assertFalse(error.is_displayed())
