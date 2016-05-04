@@ -1,9 +1,11 @@
 import sys
 import os
 import time
+from contextlib import contextmanager
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.common.exceptions import WebDriverException
 from datetime import datetime
 
@@ -117,3 +119,12 @@ class FunctionalTest(StaticLiveServerTestCase):
         # one more try, which will raise any errors if they are outstanding
         return function_with_assertion()
 
+    ### Experiment
+
+    @contextmanager
+    def wait_for_page_load(self, timeout=30):
+        old_page = self.browser.find_element_by_tag_name('html')
+        yield
+        WebDriverWait(self.browser, timeout).until(
+                staleness_of(old_page)
+        )
