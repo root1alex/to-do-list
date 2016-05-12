@@ -12,3 +12,12 @@
     {% endfor %}
   </ul>
 {% endblock %}
+
+{% block share %}
+  <h4>List shared with {{ owner.email }}:</h4>
+  <ul>
+    {% for list in owner.shared_with.all %}
+      <li><a href="{{ list.get_absolute_url }}">{{ list.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
